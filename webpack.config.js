@@ -24,7 +24,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new VueLoaderPlugin()
     ],
-    entry: './frontend/js/index.js',
+    entry: './src/main/resources/js/index.js',
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'src', 'main', 'resources', 'static', 'dist'),
