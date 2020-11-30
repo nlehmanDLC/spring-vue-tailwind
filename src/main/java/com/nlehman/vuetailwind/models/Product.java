@@ -6,7 +6,7 @@ public class Product {
      */
     public static final String FABRIC = "fabric";
     public static final String WALLCOVERING = "wallcovering";
-    public static final String PRIVACY_CURTAIN = "privacyCurtain";
+    public static final String PRIVACY_CURTAIN = "privacyCurtains";
     private String name;
     private String image;
     private String category;

@@ -82,7 +82,9 @@
               <li
                 v-for="(category, index) in categories"
                 v-bind:key="index"
-                class="pb-2"
+                class="px-4 py-2 mt-2 rounded cursor-pointer hover:bg-gray-900"
+                :class="{'bg-gray-600': categoryIsSelected(category)}"
+                @click="toggleCategory(category)"
               >
                 {{ category }}
               </li>
@@ -94,7 +96,7 @@
       <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
         <router-link
           :to="`/products/${product.id}`"
-          v-for="product in products"
+          v-for="product in filteredProducts"
           v-bind:key="product.id"
           class="flex flex-col justify-center items-center"
         >
@@ -115,8 +117,20 @@ export default {
     return {
       categories: ["Fabric", "Wallcovering", "Privacy Curtains"],
       products: [],
+      selectedCategories: [],
       showFilters: false,
     };
+  },
+  computed: {
+      filteredProducts: function () {
+          if(!this.selectedCategories.length) {
+              return this.products;
+          }
+          let selectedCategoriesLower = this.selectedCategories.map(cat => this.camelize(cat));
+          return this.products.filter(product => {
+              return selectedCategoriesLower.indexOf(product.category) !== -1;
+          })
+      }
   },
   methods: {
     getProducts: function () {
@@ -129,6 +143,21 @@ export default {
           console.log("Error: " + error);
         });
     },
+    toggleCategory: function(category) {
+        let index = this.selectedCategories.indexOf(category);
+        console.log(index);
+        if(index === -1) {
+            this.selectedCategories.push(category);
+        } else {
+            this.selectedCategories.splice(index, 1);
+        }
+    },
+    categoryIsSelected: function(category) {
+        return this.selectedCategories.includes(category);
+    },
+    camelize: function(str) {
+        return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+    }
   },
   mounted() {
     this.getProducts();
