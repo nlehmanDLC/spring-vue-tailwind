@@ -1,0 +1,154 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<nav x-data="{ open: false, userMenu: false }"
+     class="bg-gray-300 dark:bg-gray-800"
+     th:fragment="nav"
+     xmlsn:th="http://www.w3.org/1999/xhtml">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between h-16">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                <!-- Mobile menu button-->
+                <button @click="open = !open"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <!-- Icon when menu is closed. -->
+                    <!--
+              Heroicon name: menu
+
+              Menu open: "hidden", Menu closed: "block"
+            -->
+                    <svg x-show="!open"
+                         class="block h-6 w-6"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         aria-hidden="true">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <!-- Icon when menu is open. -->
+                    <!--
+              Heroicon name: x
+
+              Menu open: "block", Menu closed: "hidden"
+            -->
+                    <svg x-show="open"
+                         class="h-6 w-6"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         aria-hidden="true">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex-1 flex items-center justify-center sm:justify-start">
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <img class="h-12 w-auto"
+                            src="logo.svg" th:src="@{/images/yarnball.svg}"
+                            alt="Momentum">
+                        <span class="hidden lg:block text-2xl font-semibold pl-2 text-gray-800 dark:text-gray-100">Momentum</span>
+                    </a>
+                </div>
+                <div class="hidden sm:block sm:ml-6">
+                    <div class="flex space-x-4">
+                        <a href="#"
+                           th:href="@{/about}"
+                           x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/about' }"
+                           class="px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">About</a>
+                        <a href="#"
+                           th:href="@{/products}"
+                           x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/products' }"
+                           class="px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Products</a>
+                        <a href="#"
+                           th:href="@{/contact}"
+                           x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/contact' }"
+                           class="px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <!-- Dark mode -->
+                <button
+                        @click="$dispatch('toggle-dark', 'toggle dark mode')"
+                        class="bg-gray-300 dark:bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <span class="sr-only">Toggle Dark Mode</span>
+
+                    <svg x-show="$store.theme.darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <svg x-show="!$store.theme.darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </button>
+
+                <!-- Profile dropdown -->
+                <div class="ml-3 relative">
+                    <div>
+                        <button @click="userMenu = !userMenu"
+                                class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                                id="user-menu"
+                                aria-haspopup="true">
+                            <span class="sr-only">Open user menu</span>
+                            <img class="h-8 w-8 rounded-full"
+                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                 alt="">
+                        </button>
+                    </div>
+                    <!--Profile dropdown panel, show/hide based on dropdown state.-->
+                    <div x-show="userMenu"
+                         @click.away="userMenu = false"
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="opacity-0 transform scale-95"
+                         x-transition:enter-end="opacity-100 transform scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="opacity-100 transform scale-100"
+                         x-transition:leave-end="opacity-0 transform scale-95"
+                         class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+                         role="menu"
+                         aria-orientation="vertical"
+                         aria-labelledby="user-menu">
+                        <a href="#"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           role="menuitem">Your Profile</a>
+                        <a href="#"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           role="menuitem">Settings</a>
+                        <a href="#"
+                           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                           role="menuitem">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div x-show="open"
+         class="sm:hidden"
+         @click.away="open = false"
+         x-transition:enter="transition ease-out duration-100"
+         x-transition:enter-start="opacity-0 transform scale-95"
+         x-transition:enter-end="opacity-100 transform scale-100"
+         x-transition:leave="transition ease-in duration-75"
+         x-transition:leave-start="opacity-100 transform scale-100"
+         x-transition:leave-end="opacity-0 transform scale-95">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="#"
+               th:href="@{/about}"
+               x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/about' }"
+               class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-300 hover:text-white hover:bg-gray-700">About</a>
+            <a href="#"
+               th:href="@{/products}"
+               x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/products' }"
+               class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-300 hover:text-white hover:bg-gray-700">Products</a>
+            <a href="#"
+               th:href="@{/contact}"
+               x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/contact' }"
+               class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-300 hover:text-white hover:bg-gray-700">Contact</a>
+        </div>
+    </div>
+</nav>
