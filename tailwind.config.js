@@ -2,7 +2,7 @@ module.exports = {
   purge: {
       content: [
           './src/main/resources/**/*.html',
-          './src/main/resources/**/*.vue',
+          './frontend/**/*.vue',
         ]
     },
   darkMode: 'class', // or 'media' or 'class'
