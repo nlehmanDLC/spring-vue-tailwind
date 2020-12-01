@@ -13,6 +13,7 @@
         <div v-show="!showFilters" class="relative">
           <div class="absolute top-0 left-0 pt-4 pl-2 flex">
             <button
+              id="filterToggle"
               @click="showFilters = true"
               class="rounded-md text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
             >
@@ -82,8 +83,10 @@
               <li
                 v-for="(category, index) in categories"
                 v-bind:key="index"
-                class="px-4 py-2 mt-2 rounded cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-900"
-                :class="{'bg-gray-300 dark:bg-gray-600': categoryIsSelected(category)}"
+                class="category px-4 py-2 mt-2 rounded cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-900"
+                :class="{
+                  'bg-gray-300 dark:bg-gray-600': categoryIsSelected(category),
+                }"
                 @click="toggleCategory(category)"
               >
                 {{ category }}
@@ -93,7 +96,9 @@
         </div>
       </transition>
       <!-- Grid -->
-      <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
+      <div
+        class="flex-1 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4"
+      >
         <router-link
           :to="`/products/${product.id}`"
           v-for="product in filteredProducts"
@@ -122,15 +127,17 @@ export default {
     };
   },
   computed: {
-      filteredProducts: function () {
-          if(!this.selectedCategories.length) {
-              return this.products;
-          }
-          let selectedCategoriesLower = this.selectedCategories.map(cat => this.camelize(cat));
-          return this.products.filter(product => {
-              return selectedCategoriesLower.indexOf(product.category) !== -1;
-          })
+    filteredProducts: function () {
+      if (!this.selectedCategories.length) {
+        return this.products;
       }
+      let selectedCategoriesLower = this.selectedCategories.map((cat) =>
+        this.camelize(cat)
+      );
+      return this.products.filter((product) => {
+        return selectedCategoriesLower.indexOf(product.category) !== -1;
+      });
+    },
   },
   methods: {
     getProducts: function () {
@@ -143,20 +150,22 @@ export default {
           console.log("Error: " + error);
         });
     },
-    toggleCategory: function(category) {
-        let index = this.selectedCategories.indexOf(category);
-        if(index === -1) {
-            this.selectedCategories.push(category);
-        } else {
-            this.selectedCategories.splice(index, 1);
-        }
+    toggleCategory: function (category) {
+      let index = this.selectedCategories.indexOf(category);
+      if (index === -1) {
+        this.selectedCategories.push(category);
+      } else {
+        this.selectedCategories.splice(index, 1);
+      }
     },
-    categoryIsSelected: function(category) {
-        return this.selectedCategories.includes(category);
+    categoryIsSelected: function (category) {
+      return this.selectedCategories.includes(category);
     },
-    camelize: function(str) {
-        return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
-    }
+    camelize: function (str) {
+      return str
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+    },
   },
   mounted() {
     this.getProducts();
