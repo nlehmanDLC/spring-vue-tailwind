@@ -1,5 +1,6 @@
 package com.nlehman.vuetailwind.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     @JsonProperty
     private Long id;
     private String name;
@@ -54,5 +56,9 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

@@ -52,7 +52,6 @@ public class AlternativeProductService implements ProductService{
 
     @Override
     public Object getProduct(long id) {
-        // TODO Auto-generated method stub
         return null;
     }
 
