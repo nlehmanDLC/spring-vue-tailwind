@@ -3,12 +3,12 @@
      class="bg-gray-300 dark:bg-gray-800"
      th:fragment="nav"
      xmlsn:th="http://www.w3.org/1999/xhtml">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button-->
                 <button @click="open = !open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                         aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <!-- Icon when menu is closed. -->
@@ -18,7 +18,7 @@
               Menu open: "hidden", Menu closed: "block"
             -->
                     <svg x-show="!open"
-                         class="block h-6 w-6"
+                         class="block w-6 h-6"
                          xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
@@ -36,7 +36,7 @@
               Menu open: "block", Menu closed: "hidden"
             -->
                     <svg x-show="open"
-                         class="h-6 w-6"
+                         class="w-6 h-6"
                          xmlns="http://www.w3.org/2000/svg"
                          fill="none"
                          viewBox="0 0 24 24"
@@ -49,13 +49,16 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex-1 flex items-center justify-center sm:justify-start">
+            <div class="flex items-center justify-center flex-1 sm:justify-start">
                 <div class="flex-shrink-0">
-                    <a href="/" class="flex items-center">
-                        <img class="h-12 w-auto"
-                            src="logo.svg" th:src="@{/images/yarnball.svg}"
-                            alt="Momentum">
-                        <span class="hidden lg:block text-2xl font-semibold pl-2 text-gray-800 dark:text-gray-100">Momentum</span>
+                    <a href="/"
+                       class="flex items-center">
+                        <img class="w-auto h-12"
+                             src="logo.svg"
+                             th:src="@{/images/yarnball.svg}"
+                             alt="Momentum">
+                        <span
+                              class="hidden pl-2 text-2xl font-semibold text-gray-800 lg:block dark:text-gray-100">Momentum</span>
                     </a>
                 </div>
                 <div class="hidden sm:block sm:ml-6">
@@ -63,38 +66,64 @@
                         <a href="#"
                            th:href="@{/about}"
                            x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/about' }"
-                           class="px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">About</a>
+                           class="px-3 py-2 text-sm font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">About</a>
                         <a href="#"
                            th:href="@{/products}"
                            x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/products' }"
-                           class="px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Products</a>
+                           class="px-3 py-2 text-sm font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Products</a>
                         <a href="#"
                            th:href="@{/contact}"
                            x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/contact' }"
-                           class="px-3 py-2 rounded-md text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Contact</a>
+                           class="px-3 py-2 text-sm font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Contact</a>
                     </div>
                 </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <!-- Dark mode -->
-                <button
-                        @click="$dispatch('toggle-dark', 'toggle dark mode')"
-                        class="bg-gray-300 dark:bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                <button @click="$dispatch('toggle-dark', 'toggle dark mode')"
+                        class="p-1 text-gray-400 bg-gray-300 rounded-full dark:bg-gray-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span class="sr-only">Toggle Dark Mode</span>
 
-                    <svg x-show="$store.theme.darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    <svg x-show="!$store.theme.darkMode" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg x-show="$store.theme.darkMode"
+                         class="w-6 h-6"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                    <svg x-show="!$store.theme.darkMode"
+                         class="w-6 h-6"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
                 </button>
 
                 <!-- Profile dropdown -->
-                <div class="ml-3 relative">
-                    <div>
+                <div class="relative ml-3">
+                    <div sec:authorize="isAnonymous()">
+                        <a href="/login"
+                           x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/about' }"
+                           class="px-3 py-2 text-sm font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Login</a>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
                         <button @click="userMenu = !userMenu"
-                                class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                                class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                 id="user-menu"
                                 aria-haspopup="true">
                             <span class="sr-only">Open user menu</span>
-                            <img class="h-8 w-8 rounded-full"
+                            <img class="w-8 h-8 rounded-full"
                                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                  alt="">
                         </button>
@@ -108,20 +137,23 @@
                          x-transition:leave="transition ease-in duration-75"
                          x-transition:leave-start="opacity-100 transform scale-100"
                          x-transition:leave-end="opacity-0 transform scale-95"
-                         class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+                         class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
                          role="menu"
                          aria-orientation="vertical"
                          aria-labelledby="user-menu">
                         <a href="#"
-                            th:href="@{/profile}"
+                           th:href="@{/profile}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                            role="menuitem">Your Profile</a>
                         <a href="#"
-                            th:href="@{/settings}"
+                           th:href="@{/settings}"
                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                            role="menuitem">Settings</a>
-                        <form th:action="@{/logout}" method="POST">
-                            <input class="block px-4 py-2 w-full text-left bg-white cursor-pointer text-sm text-gray-700 hover:bg-gray-100" type="submit" value="Sign Out" />
+                        <form th:action="@{/logout}"
+                              method="POST">
+                            <input class="block w-full px-4 py-2 text-sm text-left text-gray-700 bg-white cursor-pointer hover:bg-gray-100"
+                                   type="submit"
+                                   value="Sign Out" />
                         </form>
                     </div>
                 </div>
@@ -142,15 +174,15 @@
             <a href="#"
                th:href="@{/about}"
                x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/about' }"
-               class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-300 hover:text-white hover:bg-gray-700">About</a>
+               class="block px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-white hover:bg-gray-700">About</a>
             <a href="#"
                th:href="@{/products}"
                x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/products' }"
-               class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-300 hover:text-white hover:bg-gray-700">Products</a>
+               class="block px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-white hover:bg-gray-700">Products</a>
             <a href="#"
                th:href="@{/contact}"
                x-bind:class="{ 'text-white bg-gray-400 dark:bg-gray-900': location.pathname === '/contact' }"
-               class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 dark:text-gray-300 hover:text-white hover:bg-gray-700">Contact</a>
+               class="block px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-white hover:bg-gray-700">Contact</a>
         </div>
     </div>
 </nav>
