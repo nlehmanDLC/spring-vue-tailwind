@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/app}">
+<head>
+    <title>Vue Tailwind - Profile</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        Profile
+        <div th:text="${loggedInUser.getName()}">blah</div>
+    </div>
+</body>
+</html>

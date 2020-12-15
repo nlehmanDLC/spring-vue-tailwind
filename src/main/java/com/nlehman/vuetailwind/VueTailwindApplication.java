@@ -1,7 +1,9 @@
 package com.nlehman.vuetailwind;
 
 import com.nlehman.vuetailwind.entities.Product;
+import com.nlehman.vuetailwind.entities.User;
 import com.nlehman.vuetailwind.repositories.ProductRepository;
+import com.nlehman.vuetailwind.repositories.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 @EntityScan(basePackages = {"com.nlehman.vuetailwind.entities"})
@@ -22,9 +26,38 @@ public class VueTailwindApplication {
 		SpringApplication.run(VueTailwindApplication.class, args);
     }
 
+
     @Bean
-    public CommandLineRunner demo(ProductRepository repository) {
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CommandLineRunner demo(ProductRepository repository, UserRepository userRepository) {
         return (args) -> {
+            User nlehman = new User();
+            nlehman.setUsername("nlehman");
+            nlehman.setName("Nathan Lehman");
+            nlehman.setPassword(passwordEncoder().encode("nlehmanpw"));
+            userRepository.save(nlehman);
+            User jhester = new User();
+            jhester.setUsername("jhester");
+            jhester.setName("John Hester");
+            jhester.setPassword(passwordEncoder().encode("jhesterpw"));
+            userRepository.save(jhester);
+            User cstone = new User();
+            cstone.setUsername("cstone");
+            cstone.setName("Chris Stone");
+            cstone.setPassword(passwordEncoder().encode("cstonepw"));
+            userRepository.save(cstone);
+
+            log.info("Users found with findAll():");
+            log.info("______________________________");
+            for (User user : userRepository.findAll()) {
+                log.info(user.toString());
+            }
+            log.info("");
+
             Product ace = new Product("Ace");
             Product acoustic = new Product("Acoustic");
             Product analog = new Product("Analog");
