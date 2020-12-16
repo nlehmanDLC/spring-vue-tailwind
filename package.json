@@ -6,8 +6,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "watch": "webpack --watch --mode development",
-    "build:dev": "webpack --mode development",
-    "build:prod": "set NODE_ENV=production&&webpack --mode production"
+    "dev": "webpack --mode development",
+    "prod": "set NODE_ENV=production&&webpack --mode production"
   },
   "author": "Nathan Lehman",
   "license": "ISC",
