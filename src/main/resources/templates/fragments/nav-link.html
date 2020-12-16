@@ -1,0 +1,21 @@
+<a th:fragment="to(href, name)"
+   href="#"
+   th:href="@{${href}}"
+   th:classappend="(${href} == ${#httpServletRequest.requestURI})? 'text-white bg-gray-400 dark:bg-gray-900'"
+   th:text="${name}"
+   class="px-3 py-2 text-sm font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-gray-600 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-900">Name</a>
+
+<a th:fragment="toMobile(href, name)"
+   href="#"
+   th:href="@{${href}}"
+   th:classappend="(${href} == ${#httpServletRequest.requestURI})? 'text-white bg-gray-400 dark:bg-gray-900'"
+   th:text="${name}"
+   class="block px-3 py-2 text-base font-medium text-gray-800 rounded-md dark:text-gray-300 hover:text-white hover:bg-gray-700">Name</a>
+
+
+<a th:fragment="toUserMenu(href, name)"
+   href="#"
+   th:href="@{${href}}"
+   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+   th:text="${name}"
+   role="menuitem">Name</a>

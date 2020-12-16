@@ -1,0 +1,21 @@
+<div x-show="userMenu"
+     @click.away="userMenu = false"
+     x-transition:enter="transition ease-out duration-100"
+     x-transition:enter-start="opacity-0 transform scale-95"
+     x-transition:enter-end="opacity-100 transform scale-100"
+     x-transition:leave="transition ease-in duration-75"
+     x-transition:leave-start="opacity-100 transform scale-100"
+     x-transition:leave-end="opacity-0 transform scale-95"
+     class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
+     role="menu"
+     aria-orientation="vertical"
+     aria-labelledby="user-menu">
+    <a th:replace="fragments/nav-link :: toUserMenu(href='/profile', name='Your Profile')"></a>
+    <a th:replace="fragments/nav-link :: toUserMenu(href='/settings', name='Settings')"></a>
+    <form th:action="@{/logout}"
+          method="POST">
+        <input class="block w-full px-4 py-2 text-sm text-left text-gray-700 bg-white cursor-pointer hover:bg-gray-100"
+               type="submit"
+               value="Sign Out" />
+    </form>
+</div>

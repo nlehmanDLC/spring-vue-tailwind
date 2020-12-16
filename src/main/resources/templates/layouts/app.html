@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"  x-data :class="{ 'dark': $store.theme.darkMode }" >
+      xmlns:th="http://www.thymeleaf.org"
+      x-data
+      :class="{ 'dark': $store.theme.darkMode }">
 
 <head>
     <meta http-equiv="Content-Type"
@@ -9,9 +11,10 @@
           content="width=device-width, initial-scale=1">
 </head>
 
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" @toggle-dark.window="$store.theme.darkMode = !$store.theme.darkMode; localStorage.darkMode = $store.theme.darkMode;">
+<body class="text-gray-900 bg-white dark:bg-gray-900 dark:text-white"
+      @toggle-dark.window="$store.theme.darkMode = !$store.theme.darkMode; localStorage.darkMode = $store.theme.darkMode;">
     <div>
-        <header th:insert="~{fragments/header :: nav}"></header>
+        <header th:insert="~{fragments/header}"></header>
         <div layout:fragment="content"
              id='app'></div>
     </div>
