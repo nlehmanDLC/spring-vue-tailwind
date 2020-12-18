@@ -1,11 +1,12 @@
 package com.nlehman.vuetailwind;
 
 import com.nlehman.vuetailwind.controllers.MainController;
-
+import com.nlehman.vuetailwind.services.MyUserDetailsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(MainController.class)
 @OverrideAutoConfiguration(enabled = true)
+@Import(MyUserDetailsService.class)
 public class MainControllerTest {
 
     @Autowired
